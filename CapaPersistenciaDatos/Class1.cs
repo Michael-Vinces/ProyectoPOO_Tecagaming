@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CapaPersistenciaDatos;
 using CapaPersistenciaDatos.Modelos;
 
-namespace CapaPresentacion
-
+namespace CapaPersistenciaDatos
 {
-    public class Program
+    public class Class1
     {
-        public static void Main(string[] args)
-        {
-        }
     }
 }
