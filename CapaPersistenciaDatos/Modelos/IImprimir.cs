@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace CapaPersistenciaDatos.Modelos
 {
-    public class ClassExample
+    public interface IImprimir
     {
+
+        string MostrarCliente();
+
+        string MostrarTotalPago();
+
     }
 }
