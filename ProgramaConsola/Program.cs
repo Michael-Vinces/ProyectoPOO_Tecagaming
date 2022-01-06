@@ -32,42 +32,28 @@ namespace CapaPresentacion
                 Usuario usuario = new Usuario(); // Instancia de la clase Usuario
                 Productos productos = new Productos(); // Instancia de la clase Productos
                 Cliente cliente = new Cliente(); // Instancia de la clase Cliente
-                TotalPago totalPago = new TotalPago(); // Instancia de la clase TotalPago
-                DateTime fechaEmision = DateTime.Now; // Instancia para la fecha en tiempo real
+                ProductoEscogido nProducto = new ProductoEscogido(); // Instancia de la clase ProductoEscogido
 
-                // Lista que contiene el catalogo de los productos 
-                List<string> catalogo = new List<string>();
+                GestionCliente gcliente = new GestionCliente(); // Instancia de la clase GestionCliente
+                GestionProductos gproductos = new GestionProductos("", 0); // Instancia de la clase GestionProducto
+                GestionProductoEscogido gproductoEscogido = new GestionProductoEscogido(); // Instancia de la clase GestionProductoEscogido
+                GestionImprimir gimprimir = new GestionImprimir(); // Instancia de la clase GestionImprimir
+                GestionProductos productonuevo = new GestionProductos(productos.NuevoProducto, productos.NuevoPrecio);
 
-                catalogo.Add("Lg 27Pulg, 155Ghz,120 Fps");
-                catalogo.Add("Aoc 'Rog' 32Pulg C32 G208");
-                catalogo.Add("Samsung 27Pulg Curve 1.8M");
-                catalogo.Add("Gigabyte 32 P Pantalla Pc");
-                catalogo.Add("Teclado Mecánico Redragon");
-                catalogo.Add("Mouse Gaming color Blanco");
-                catalogo.Add("Teclado Mecanico Apex Pro");
-                catalogo.Add("Cpu Core-i5 4taG 36gb Ram");
-                catalogo.Add("Logitech wirelessRGB G320");
-                catalogo.Add("Kit GamingRGB Charge Fast");
+                GestionProductos producto1 = new GestionProductos("Mouse Gaming color Blanco", 346);
+                GestionProductos producto2 = new GestionProductos("Aoc 'Rog' 32Pulg C32 G208", 370);
+                GestionProductos producto3 = new GestionProductos("Samsung 27Pulg Curve 1.8M", 788);
+                GestionProductos producto4 = new GestionProductos("Gigabyte 32 P Pantalla Pc", 572);
+                GestionProductos producto5 = new GestionProductos("Teclado Mecánico Redragon", 100);
 
-                // Lista que contiene el precio de los productos 
-                List<double> precios = new List<double>();
+                List<GestionProductos> inventario = new List<GestionProductos>();// Guarda el nombre y precio al inventario
+                inventario.Add(producto1);
+                inventario.Add(producto2);
+                inventario.Add(producto3);
+                inventario.Add(producto4);
+                inventario.Add(producto5);
 
-                precios.Add(346);
-                precios.Add(370);
-                precios.Add(788);
-                precios.Add(572);
-                precios.Add(100);
-                precios.Add(100);
-                precios.Add(279);
-                precios.Add(329);
-                precios.Add(150);
-                precios.Add(100);
-
-                //Listas que permiten guardar los productos que el usuario escoja
-
-                List<string> VentaProducto = new List<string>(); // Lista que permite guardar el nombre del producto
-                List<double> VentaPrecio = new List<double>(); // Lista que permite guardar el precio del producto
-
+                List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido>();// Guarda el producto escogido con su nombre y producto
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("\t\t********************************************************************************");
@@ -237,21 +223,8 @@ namespace CapaPresentacion
                                 Console.WriteLine("\t\t********************************************************************************");
                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                for (int i = 0; i < catalogo.Count; i++)
-                                {
-                                    string ImprimirProducto = catalogo[i];
-
-                                    Console.Write("\t\t*  " + ImprimirProducto + "");
-
-                                    for (int n = 0; n < precios.Count; n++)
-                                    {
-                                        double ImprimirPrecio = precios[i];
-                                        Console.Write("---------$" + ImprimirPrecio + "                                      *\n");
-
-                                        break;
-                                    }
-
-                                }
+                                Console.WriteLine(gproductos.MostrarInventario(inventario));// Muestra la lista de productos del inventario
+                                
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.WriteLine("\t\t********************************************************************************");
                                 Console.ForegroundColor = ConsoleColor.Black;
@@ -343,18 +316,7 @@ namespace CapaPresentacion
                                             Console.WriteLine("\t\t********************************************************************************");
                                             Console.ForegroundColor = ConsoleColor.Black;
 
-                                            for (int i = 0; i < catalogo.Count; i++)
-                                            {
-                                                string ImprimirProducto = catalogo[i];
-                                                Console.Write("\t\t*  " + (i + 1) + ". " + ImprimirProducto + " ");
-
-                                                for (int n = 0; n < precios.Count; n++)
-                                                {
-                                                    double ImprimirPrecio = precios[i];
-                                                    Console.Write("\t$" + ImprimirPrecio + "\n");
-                                                    break;
-                                                }
-                                            }
+                                            Console.WriteLine(gproductos.MostrarInventario(inventario));// Muestra la lista de productos del inventario
 
                                             // Se inicializan las variables
 
@@ -370,25 +332,14 @@ namespace CapaPresentacion
                                             Console.WriteLine("\t\t********************************************************************************");
                                             Console.ForegroundColor = ConsoleColor.Black;
 
-                                            while (agg <= 0 || agg >= catalogo.Count + 1)
+                                            while (agg <= 0 || agg >= inventario.Count + 1)
                                             {
                                                 Console.Write("\t\t  Elige el producto: ");
                                                 agg = Int32.Parse(Console.ReadLine());
                                             }
 
-                                            for (int i = 0; i < agg; i++)
-                                            {
-                                                productos.NombreProducto = catalogo[i];
+                                            nProducto = gproductoEscogido.EscogerProducto(agg, inventario, productosEscogidos); // LLama al metodo Escoger un Producto
 
-                                                for (int n = 0; n < agg; n++)
-                                                {
-
-                                                    productos.ValorUnitario = precios[i];
-                                                    break;
-
-                                                }
-
-                                            }
                                             Console.Clear();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -411,11 +362,7 @@ namespace CapaPresentacion
                                                 productos.Cantidad = Int32.Parse(Console.ReadLine()); // Permite escoger un producto
                                             }
 
-                                            for (int i = 0; i < productos.Cantidad; i++)
-                                            {
-                                                VentaProducto.Add(productos.NombreProducto); //Se agrega el producto escogido a la lista de productos
-                                                VentaPrecio.Add(productos.ValorUnitario); //Se agrega el valor unitario del producto escogido a la lista de precios
-                                            }
+                                            gproductoEscogido.EscogerCantidad(productos.Cantidad, nProducto);
 
                                             Console.Clear();
 
@@ -470,7 +417,7 @@ namespace CapaPresentacion
                                             Console.WriteLine("\t\t********************************************************************************");
                                             Console.ForegroundColor = ConsoleColor.Black;
 
-                                            if (VentaProducto.Count == 0)
+                                            if (productosEscogidos.Count == 0)
                                             {
                                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -492,52 +439,20 @@ namespace CapaPresentacion
                                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                 Console.ForegroundColor = ConsoleColor.Black;
-                                                for (int i = 0; i < VentaProducto.Count; i++)
-                                                {
-                                                    string ImprimirProducto = VentaProducto[i];
-                                                    Console.Write("\t\t " + (i + 1) + ". " + ImprimirProducto + " ");
+                                                
+                                                Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidos
 
-                                                    for (int n = 0; n < VentaPrecio.Count; n++)
-                                                    {
-                                                        double ImprimirPrecio = VentaPrecio[i];
-                                                        Console.Write("----------------$" + ImprimirPrecio + "\n");
-                                                        break;
-                                                    }
-                                                }
                                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                                 Console.WriteLine("\t\t********************************************************************************");
                                                 Console.ForegroundColor = ConsoleColor.Black;
-                                                while (productos.EliminarCantidad <= 0 || productos.EliminarCantidad >= VentaProducto.Count + 1)
+                                                while (productos.EliminarCantidad <= 0 || productos.EliminarCantidad >= productosEscogidos.Count + 1)
                                                 {
                                                     Console.Write("\t\t\n               Selecciona el producto a eliminar : ");
                                                     productos.EliminarCantidad = Int32.Parse(Console.ReadLine()); //permite escribir el producto que se desea eliminar
                                                 }
-                                                for (int i = 0; i < productos.EliminarCantidad; i++)
-                                                {
-                                                    productos.EliminarProducto = VentaProducto[i];
+                                                
+                                                gproductoEscogido.EliminarProducto(productos.EliminarCantidad, productosEscogidos); // Elimina el producto deseado de la lista de la venta
 
-                                                    for (int n = 0; n < productos.EliminarCantidad; n++)
-                                                    {
-
-                                                        productos.EliminarPrecio = VentaPrecio[i];
-                                                        break;
-
-                                                    }
-
-                                                }
-
-                                                VentaProducto.Remove(productos.EliminarProducto); //Se elimina el producto escogido en la lista de productos de venta
-                                                VentaPrecio.Remove(productos.EliminarPrecio); //Se elimina el precio del producto escogido en la lista de precios de venta
-
-                                                Console.Clear();
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-                                                Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~             El producto              ~~~~~~~~~~~~~~~~~~~~~");
-                                                Console.WriteLine("\t\t                           " + productos.EliminarProducto + " $" + productos.EliminarPrecio);
-                                                Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            fue eliminado             ~~~~~~~~~~~~~~~~~~~~~");
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                             }
                                             Console.ForegroundColor = ConsoleColor.DarkYellow;
                                             Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -552,56 +467,43 @@ namespace CapaPresentacion
 
                                         case 3:
 
-                                            if (VentaProducto.Count == 0) // Si no hay ningun producto en la lista entrar a este if y que vuelva al menu 
-                                            {
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-                                                Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            LISTA DE VENTA            ~~~~~~~~~~~~~~~~~~~~~");
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-                                                Console.WriteLine("\t\t La lista está vacía.");
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                            }
-                                            else
-                                            {
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-                                                Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            LISTA DE VENTA            ~~~~~~~~~~~~~~~~~~~~~");
-                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                                Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-
-                                                for (int i = 0; i < VentaProducto.Count; i++)
+                                                if (productosEscogidos.Count == 0) // Si no hay ningun producto en la lista entrar a este if y que vuelva al menu 
                                                 {
-                                                    string ImprimirProducto = VentaProducto[i];
-                                                    Console.Write("\t\t " + (i + 1) + ". " + ImprimirProducto + " ");
-
-                                                    for (int n = 0; n < VentaPrecio.Count; n++)
-                                                    {
-                                                        double ImprimirPrecio = VentaPrecio[i];
-                                                        Console.Write("---------------$" + ImprimirPrecio + "\n");
-                                                        break;
-                                                    }
-
+                                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ForegroundColor = ConsoleColor.Black;
+                                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            LISTA DE VENTA            ~~~~~~~~~~~~~~~~~~~~~");
+                                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ForegroundColor = ConsoleColor.Black;
+                                                    Console.WriteLine("\t\t La lista está vacía.");
+                                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                 }
-                                            }
-                                            Console.ForegroundColor = ConsoleColor.DarkBlue;
-                                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                            Console.ForegroundColor = ConsoleColor.Black;
-                                            Console.WriteLine("\t\t~~~~~~~~~~~~~~~          Presione enter para continuar           ~~~~~~~~~~~~~~~");
-                                            Console.ForegroundColor = ConsoleColor.DarkBlue;
-                                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                            Console.ReadKey();
-                                            Console.Clear();
+                                                else
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ForegroundColor = ConsoleColor.Black;
+                                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            LISTA DE VENTA            ~~~~~~~~~~~~~~~~~~~~~");
+                                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ForegroundColor = ConsoleColor.Black;
 
-                                            break;
+                                                    Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidosConsole.ForegroundColor = ConsoleColor.DarkBlue;
+                                                    
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ForegroundColor = ConsoleColor.Black;
+                                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~          Presione enter para continuar           ~~~~~~~~~~~~~~~");
+                                                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                    Console.ReadKey();
+                                                    Console.Clear();
+                                                }
+                                                break;
 
                                         case 4:
-                                            if (VentaProducto.Count == 0)  // Si no hay ningun producto agregado a la lista entrar a este if  y que vuelva al menu
+                                            if (productosEscogidos.Count == 0)  // Si no hay ningun producto agregado a la lista entrar a este if  y que vuelva al menu
                                             {
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -640,26 +542,8 @@ namespace CapaPresentacion
                                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------\n");
                                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                                for (int i = 0; i < VentaProducto.Count; i++)
-                                                {
-                                                    string ImprimirProducto = VentaProducto[i];
-                                                    Console.Write("\t\t " + (i + 1) + ". " + ImprimirProducto + " ");
-
-                                                    for (int n = 0; n < VentaPrecio.Count; n++)
-                                                    {
-                                                        double ImprimirPrecio = VentaPrecio[i];
-
-                                                        totalPago.Subtotal += ImprimirPrecio;
-
-                                                        Console.Write("~~~~~~~~~~~~~~~~$" + ImprimirPrecio + "\n");
-                                                        break;
-                                                    }
-
-                                                }
-                                                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                                                Console.WriteLine("\n\t\t********************************************************************************");
-                                                Console.ForegroundColor = ConsoleColor.Black;
-                                                Console.WriteLine("\t\t  SUBTOTAL: \t$" + totalPago.Subtotal);
+                                                Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidos
+                                            
                                                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                                                 Console.WriteLine("\t\t********************************************************************************");
                                                 opcion = 0;
@@ -682,34 +566,8 @@ namespace CapaPresentacion
                                                 {
 
                                                     case 1:
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t|                      TECAGAMING FACTURA                       |");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t| Dirección        |  Calle 14 y Av 30 (Dentro de Plaza Forum)  |");
-                                                        Console.WriteLine("\t\t\t| Contacto         |  2928205                                   |");
-                                                        Console.WriteLine("\t\t\t| Ciudad           |  Manta, Manabi                             |");
-                                                        Console.WriteLine("\t\t\t| Fecha de Emisión |  " + fechaEmision + "                       |");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine(cliente.MostrarCliente()); // Metodo que muestra los datos del cliente
-                                                        Console.WriteLine(" \n");
-
-                                                        for (int i = 0; i < VentaProducto.Count; i++) // Muestra la lista de productos y sus precios de la venta 
-                                                        {
-                                                            Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                            string ImprimirProducto = VentaProducto[i];
-                                                            Console.Write("\t\t\t|\t" + (i + 1) + ". " + ImprimirProducto + " ");
-
-                                                            for (int n = 0; n < VentaPrecio.Count; n++)
-                                                            {
-                                                                double ImprimirVenta = VentaPrecio[i];
-                                                                Console.Write("\t$" + ImprimirVenta + "\t\t\t|\n");
-                                                                break;
-                                                            }
-
-                                                        }
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------\n");
-                                                        Console.WriteLine(totalPago.MostrarTotalPago()); // Muestra los datos de pago de la venta
+                                                        Console.WriteLine(gimprimir.MostrarFactura(productosEscogidos, cliente));
+                                                        
                                                         Console.ForegroundColor = ConsoleColor.Green;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                         Console.ForegroundColor = ConsoleColor.Black;
@@ -729,39 +587,12 @@ namespace CapaPresentacion
                                                         Console.ReadKey();
                                                         Console.Clear();
                                                         accesoVenta = false;
-                                                        VentaProducto.Clear();
-                                                        VentaPrecio.Clear();
+                                                        productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
                                                         break;
 
                                                     case 2:
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t|                     TECAGAMING PROFORMA                       |");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine("\t\t\t| Dirección        |  Calle 14 y Av 30 (Dentro de Plaza Forum)  |");
-                                                        Console.WriteLine("\t\t\t| Contacto         |  2928205                                   |");
-                                                        Console.WriteLine("\t\t\t| Ciudad           |  Manta, Manabi                             |");
-                                                        Console.WriteLine("\t\t\t| Fecha de Emisión |  " + fechaEmision + "                       |");
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                        Console.WriteLine(cliente.MostrarCliente()); // Metodo que muestra los datos del cliente
-                                                        Console.WriteLine(" \n");
-
-                                                        for (int i = 0; i < VentaProducto.Count; i++) // Muestra la lista de productos y sus precios de la venta 
-                                                        {
-                                                            Console.WriteLine("\t\t\t-----------------------------------------------------------------");
-                                                            string ImprimirProducto = VentaProducto[i];
-                                                            Console.Write("\t\t\t|\t" + (i + 1) + ". " + ImprimirProducto + " ");
-
-                                                            for (int n = 0; n < VentaPrecio.Count; n++)
-                                                            {
-                                                                double ImprimirVenta = VentaPrecio[i];
-                                                                Console.Write("\t$" + ImprimirVenta + "\t\t\t|\n");
-                                                                break;
-                                                            }
-
-                                                        }
-                                                        Console.WriteLine("\t\t\t-----------------------------------------------------------------\n");
-                                                        Console.WriteLine(totalPago.MostrarTotalPago()); // Muestra los datos de pago de la venta
+                                                        Console.WriteLine(gimprimir.MostrarProforma(productosEscogidos, cliente));
+                                                    
                                                         Console.ForegroundColor = ConsoleColor.Green;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                         Console.ForegroundColor = ConsoleColor.Black;
@@ -781,8 +612,7 @@ namespace CapaPresentacion
                                                         Console.ReadKey();
                                                         Console.Clear();
                                                         accesoVenta = false;
-                                                        VentaProducto.Clear();
-                                                        VentaPrecio.Clear();
+                                                        productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
                                                         break;
 
                                                     case 3:
@@ -793,9 +623,8 @@ namespace CapaPresentacion
                                                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                                                         Console.WriteLine("\t\t********************************************************************************");
 
-                                                        VentaProducto.Clear(); // Limpia la lista de los productos agregados a la venta
-                                                        VentaPrecio.Clear(); // Limpia la lista de los precios de los productos agregados a la venta
-
+                                                        productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
+                                                        
                                                         Console.ForegroundColor = ConsoleColor.DarkBlue;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                         Console.ForegroundColor = ConsoleColor.Black;
@@ -815,8 +644,8 @@ namespace CapaPresentacion
                                         case 5:
                                             // Este caso permite cancelar la venta si el usuario lo requiere
 
-                                            VentaProducto.Clear();
-                                            VentaPrecio.Clear();
+                                            productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
+
                                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                                             Console.WriteLine("\t\t********************************************************************************");
                                             Console.ForegroundColor = ConsoleColor.Black;
@@ -893,11 +722,9 @@ namespace CapaPresentacion
                                     productos.NuevoPrecio = Double.Parse(Console.ReadLine());
                                 }
 
-                                catalogo.Add(productos.NuevoProducto);
-                                precios.Add(productos.NuevoPrecio);
+                                inventario.Add(productonuevo);
 
                                 Console.Clear();
-
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                 Console.ForegroundColor = ConsoleColor.Black;
@@ -925,7 +752,7 @@ namespace CapaPresentacion
                                 Console.WriteLine("\t\t********************************************************************************");
                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                if (catalogo.Count == 0)
+                                if (inventario.Count == 0)
                                 {
                                     // Si no hay ningun producto agregado se muestra lo siguiente...
                                     Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -949,55 +776,14 @@ namespace CapaPresentacion
                                     Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                     Console.ForegroundColor = ConsoleColor.Black;
 
-                                    for (int i = 0; i < catalogo.Count; i++)
-                                    {
-                                        string ImprimirProducto = catalogo[i];
-                                        Console.Write("\t\t " + (i + 1) + ". " + ImprimirProducto + " ");
+                                    Console.WriteLine(gproductos.MostrarInventario(inventario));// Muestra la lista de productos del inventario
 
-                                        for (int n = 0; n < precios.Count; n++)
-                                        {
-                                            double ImprimirPrecio = precios[i];
-                                            Console.Write("------------------$" + ImprimirPrecio + "\n");
-                                            break;
-                                        }
-
-                                    }
                                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                     Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                     Console.ForegroundColor = ConsoleColor.Black;
 
-                                    while (productos.EliminarCantidad <= 0 || productos.EliminarCantidad >= catalogo.Count + 1)
-                                    {
-                                        Console.Write("\t\tSelecciona el producto a eliminar: ");
-                                        productos.EliminarCantidad = Int32.Parse(Console.ReadLine()); //Ingreso del numero del producto a eliminar
-                                    }
+                                    gproductos.EliminarProductoinventario(productos.EliminarCantidad, inventario);
 
-                                    for (int i = 0; i < productos.EliminarCantidad; i++)
-                                    {
-                                        productos.EliminarProducto = catalogo[i];
-
-                                        for (int n = 0; n < productos.EliminarCantidad; n++)
-                                        {
-
-                                            productos.EliminarPrecio = precios[i];
-                                            break;
-
-                                        }
-
-                                    }
-
-                                    catalogo.Remove(productos.EliminarProducto); // Elimina el producto escogido de la Lista catalogo
-                                    precios.Remove(productos.EliminarPrecio);    // Elimina el precio del producto escogido de la Lista precios
-
-                                    Console.Clear();
-                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                    Console.ForegroundColor = ConsoleColor.Black;
-                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~             El producto              ~~~~~~~~~~~~~~~~~~~~~");
-                                    Console.WriteLine("\t\t                           " + productos.EliminarProducto + " $" + productos.EliminarPrecio);
-                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~            fue eliminado             ~~~~~~~~~~~~~~~~~~~~~");
-                                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                 }
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");

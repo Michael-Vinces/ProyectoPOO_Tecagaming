@@ -9,7 +9,7 @@ namespace CapaNegocio
 {
     public class GestionProductoEscogido
     {
-        ProductoEscogido pro = new ProductoEscogido();
+        ProductoEscogido total = new ProductoEscogido();
         public GestionProductoEscogido()
         {
 
@@ -61,12 +61,9 @@ namespace CapaNegocio
         }
         public string MostrarListaVenta(List<ProductoEscogido> ListaProdEscg)
         {
-
             string mensaje = "";
             int cont = 1;
-            double xd = 0;
-            double xd1 = 0;
-            double xd2 = 0;
+            double precio = 0, cantidad = 0, subtotal = 0;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
@@ -74,13 +71,13 @@ namespace CapaNegocio
             {
                 mensaje += "\n\t\t      " + cont + ". " + ListaProdEscg[i].miProducto.NombreProducto + "\t     $" + ListaProdEscg[i].miProducto.ValorUnitario + "\t\t x" + ListaProdEscg[i].Cantidad;
                 cont++;
-                xd1 = ListaProdEscg[i].Cantidad;
-                xd = ListaProdEscg[i].miProducto.ValorUnitario;
-                xd2 = xd * xd1;
-                pro.Subtotal += xd2;
+                cantidad = ListaProdEscg[i].Cantidad;
+                precio = ListaProdEscg[i].miProducto.ValorUnitario;
+                subtotal = precio * cantidad;
+                total.Subtotal += subtotal;
             }
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
-            mensaje += "\n\t\t SUBTOTAL: \t$" + pro.Subtotal;
+            mensaje += "\n\t\t SUBTOTAL: \t$" + total.Subtotal;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             return mensaje;
 
@@ -89,18 +86,17 @@ namespace CapaNegocio
         {
 
             int cont = 1;
-            double xd = 0;
-            double xd1 = 0;
-            double xd2 = 0;
+            double precio = 0, cantidad = 0, subtotal = 0;
             for (int i = 0; i < ListaProdEscg.Count; i++)
             {
                 cont++;
-                xd1 = ListaProdEscg[i].Cantidad;
-                xd = ListaProdEscg[i].miProducto.ValorUnitario;
-                xd2 = xd * xd1;
-                pro.Subtotal += xd2;
+                cantidad = ListaProdEscg[i].Cantidad;
+                precio = ListaProdEscg[i].miProducto.ValorUnitario;
+                subtotal = precio * cantidad;
+                total.Subtotal += subtotal;
             }
 
-            return pro.Subtotal;
+            return total.Subtotal;
         }
     }
+}

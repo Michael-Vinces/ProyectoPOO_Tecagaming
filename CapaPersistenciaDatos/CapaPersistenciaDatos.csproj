@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Modelos\Cliente.cs" />
     <Compile Include="Modelos\Empresa.cs" />
-    <Compile Include="Modelos\IImprimir.cs" />
     <Compile Include="Modelos\Persona.cs" />
     <Compile Include="Modelos\ProductoEscogido.cs" />
     <Compile Include="Modelos\Productos.cs" />
