@@ -47,6 +47,10 @@
     <Compile Include="GestionProductoEscogido.cs" />
     <Compile Include="GestionProductos.cs" />
     <Compile Include="GestionTotalPago.cs" />
+    <Compile Include="Observer\Empresa.cs" />
+    <Compile Include="Observer\IObserverSuscriptor.cs" />
+    <Compile Include="Observer\ISujetoEmpresa.cs" />
+    <Compile Include="Observer\Suscriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

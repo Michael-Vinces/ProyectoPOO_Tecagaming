@@ -9,29 +9,29 @@ namespace CapaNegocio
 {
     public class GestionProductos
     {
-        Productos xd = new Productos();
+        //Productos xd = new Productos();
         public Productos es { get; set; }
-        public GestionProductos(string nombre, double precio)
+        public GestionProductos()
         {
-            this.xd.NombreProducto = nombre;
-            this.xd.ValorUnitario = precio;
+            //this.xd.NombreProducto = nombre;
+            //this.xd.ValorUnitario = precio;
         }
 
-        public string MostrarInventario(List<GestionProductos> Lista)
+        public string MostrarInventario(List<Productos> Lista)
         {
             string mensaje = "";
             int cont = 1;
             mensaje += "\t\tN°         Producto                 Valor Unitario\n";
             for (int i = 0; i < Lista.Count; i++)
             {
-                mensaje += "\t\t" + cont + ". " + Lista[i].xd.NombreProducto + "\t\t$" + Lista[i].xd.ValorUnitario + "\n";
+                mensaje += "\t\t" + cont + ". " + Lista[i].NombreProducto + "\t\t$" + Lista[i].ValorUnitario + "\n";
                 cont++;
             }
             return mensaje;
         }
-        public void EliminarProductoinventario(int num, List<GestionProductos> Listainventario)
+        public void EliminarProductoinventario(int num, List<Productos> Listainventario)
         {
-            GestionProductos producto = new GestionProductos("", 0);
+            Productos producto = new Productos("",0);
 
             for (int i = 1; i <= Listainventario.Count; i++)
             {

@@ -29,10 +29,10 @@ namespace CapaNegocio
             ListaProductosEscogidos.Remove(producto);
         }
 
-        public ProductoEscogido EscogerProducto(int num, List<GestionProductos> inventario, List<ProductoEscogido> ListaProductosEscogidos)
+        public ProductoEscogido EscogerProducto(int num, List<Productos> inventario, List<ProductoEscogido> ListaProductosEscogidos)
         {
-            Productos pr = new Productos();
-            GestionProductos producto = new GestionProductos("Mouse Gaming color Blanco", 346);
+            
+            Productos producto = new Productos("Mouse Gaming color Blanco", 346);
 
             for (int i = 1; i <= inventario.Count; i++)
             {
@@ -44,10 +44,10 @@ namespace CapaNegocio
                 }
             }
             ProductoEscogido productoEscogido = new ProductoEscogido();
-
-            productoEscogido.miProducto = producto.es;
-            productoEscogido.miProducto.NombreProducto = producto.es.NombreProducto;
-            productoEscogido.miProducto.ValorUnitario = producto.es.ValorUnitario;
+            
+            productoEscogido.miProducto = producto;
+            productoEscogido.miProducto.NombreProducto = producto.NombreProducto;
+            productoEscogido.miProducto.ValorUnitario = producto.ValorUnitario;
 
             ListaProductosEscogidos.Add(productoEscogido);
 
