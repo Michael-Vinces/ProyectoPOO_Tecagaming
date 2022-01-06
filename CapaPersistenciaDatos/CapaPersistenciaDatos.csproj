@@ -45,6 +45,7 @@
     <Compile Include="Modelos\Cliente.cs" />
     <Compile Include="Modelos\IImprimir.cs" />
     <Compile Include="Modelos\Persona.cs" />
+    <Compile Include="Modelos\ProductoEscogido.cs" />
     <Compile Include="Modelos\Productos.cs" />
     <Compile Include="Modelos\TotalPago.cs" />
     <Compile Include="Modelos\Usuario.cs" />

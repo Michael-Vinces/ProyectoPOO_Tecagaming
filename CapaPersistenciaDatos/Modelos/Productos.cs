@@ -14,16 +14,14 @@ namespace CapaPersistenciaDatos.Modelos
         public string NombreProducto { get; set; }
         public double ValorUnitario { get; set; }
         public int Cantidad { get; set; }
-        public double TotalProducto { get; set; }
-
+       
         // PROPIEDADES PARA AGREGAR UN PRODUCTO
         public string NuevoProducto { get; set; }
         public double NuevoPrecio { get; set; }
 
         // PROPIEDADES PARA ELIMINAR UN PRODUCTO
         public int EliminarCantidad { get; set; }
-        public string EliminarProducto { get; set; }
-        public double EliminarPrecio { get; set; }
+      
 
         // CONSTRUCTOR DE LA CLASE PRODUCTOS
         public Productos()
@@ -31,6 +29,5 @@ namespace CapaPersistenciaDatos.Modelos
 
         }
 
-        // METODOS DE LA CLASE PRODUCTOS
     }
 }
