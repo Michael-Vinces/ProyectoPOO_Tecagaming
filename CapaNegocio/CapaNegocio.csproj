@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestionCliente.cs" />
+    <Compile Include="GestionEmpresa.cs" />
+    <Compile Include="GestionImprimir.cs" />
     <Compile Include="GestionProductoEscogido.cs" />
     <Compile Include="GestionProductos.cs" />
     <Compile Include="GestionTotalPago.cs" />

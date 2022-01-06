@@ -12,7 +12,7 @@ namespace CapaPersistenciaDatos.Modelos
         // PROPIEDADES DE LA CLASE PERSONA
 
         public string Nombre { get; set; }
-
+        public int Cedula { get; set; }
 
         // CONSTRUCTOR DE LA CLASE PERSONA
         public Persona()
