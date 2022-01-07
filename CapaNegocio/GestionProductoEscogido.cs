@@ -64,6 +64,7 @@ namespace CapaNegocio
             string mensaje = "";
             int cont = 1;
             double precio = 0, cantidad = 0, subtotal = 0;
+            total.Subtotal = 0;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
@@ -87,6 +88,7 @@ namespace CapaNegocio
 
             int cont = 1;
             double precio = 0, cantidad = 0, subtotal = 0;
+            total.Subtotal = 0;
             for (int i = 0; i < ListaProdEscg.Count; i++)
             {
                 cont++;
