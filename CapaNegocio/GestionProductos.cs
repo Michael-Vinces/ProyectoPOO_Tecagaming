@@ -9,12 +9,9 @@ namespace CapaNegocio
 {
     public class GestionProductos
     {
-        //Productos xd = new Productos();
-        public Productos es { get; set; }
+       
         public GestionProductos()
         {
-            //this.xd.NombreProducto = nombre;
-            //this.xd.ValorUnitario = precio;
         }
 
         public string MostrarInventario(List<Productos> Lista)

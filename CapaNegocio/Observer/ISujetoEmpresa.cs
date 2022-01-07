@@ -9,10 +9,7 @@ namespace CapaNegocio.Observer
 {
     public interface ISujetoEmpresa
     {
-        void AgregarSuscriptor(Cliente cliente);
-
-        void EliminarSuscriptor(IObserverSuscriptor suscriptor);
-
-        void Notificar();
+        string AgregarSuscriptor(Cliente cliente);
+        string Notificar();
     }
 }

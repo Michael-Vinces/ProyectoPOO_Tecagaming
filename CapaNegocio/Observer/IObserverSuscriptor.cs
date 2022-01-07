@@ -8,9 +8,7 @@ using CapaPersistenciaDatos.Modelos;
 namespace CapaNegocio.Observer
 {
     public interface IObserverSuscriptor
-    {
-        void Actualizar();
-        
-
+    { 
+        string Actualizar();
     }
 }

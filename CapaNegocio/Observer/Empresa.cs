@@ -14,8 +14,7 @@ namespace CapaNegocio.Observer
 
         private string nuevoProducto = "";
 
-        private List<IObserverSuscriptor> suscriptores = new List<IObserverSuscriptor>();
-
+        public List<IObserverSuscriptor> suscriptores = new List<IObserverSuscriptor>();
 
         CapaPersistenciaDatos.Modelos.Empresa Teca = new CapaPersistenciaDatos.Modelos.Empresa();
 
@@ -23,51 +22,30 @@ namespace CapaNegocio.Observer
         {
             this.empresa = Teca;
         }
-
-
-        //public string MostrarListaSubs()
-
-
-        public void AgregarSuscriptor(Cliente cliente)
+        public string AgregarSuscriptor(Cliente cliente)
         {
             Suscriptor subs = new Suscriptor();
+            string mensaje = "";
             subs.clientee = cliente;
             suscriptores.Add(subs);
-
-            Console.WriteLine($"{subs.clientee.Nombre.ToString()} con el celular de {subs.clientee.Contacto.ToString()} se ha suscrito a {empresa.Nombre}");
+            mensaje+=$"{subs.clientee.Nombre.ToString()} con el celular de {subs.clientee.Contacto.ToString()} se ha suscrito a {empresa.Nombre}\n";
+            return mensaje;
         }
-
-        public void EliminarSuscriptor(IObserverSuscriptor suscriptor)
+        public string Notificar()
         {
-            suscriptores.Remove(suscriptor);
-            Console.WriteLine($"{suscriptor.ToString()} ha eliminiado su suscripciÃ³n de {empresa.Nombre}");
-        }
-
-        public void Notificar()
-        {
+            string mensaje = "";
             foreach (var suscriptor in suscriptores)
             {
-                suscriptor.Actualizar();
-
+                mensaje+=suscriptor.Actualizar();
             }
+            return mensaje;
         }
-
-
-        public void NuevoProducto(string nombreProducto)
+        public string NuevoProducto(string nombreProducto)
         {
-
+            string mensaje = "";
             this.nuevoProducto = nombreProducto;
-            this.Notificar();
-
+            mensaje=this.Notificar();
+            return mensaje;
         }
-
-
-        public string UltimoProducto()
-        {
-
-            return this.nuevoProducto;
-
-        }
-
     }
 }

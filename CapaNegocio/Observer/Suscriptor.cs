@@ -10,25 +10,17 @@ namespace CapaNegocio.Observer
     public class Suscriptor : IObserverSuscriptor
     {
         public Cliente clientee { get; set; }
+
         public Suscriptor()
         {
-
+            
         }
 
-        public string NombreSuscriptor { get; set; }
-
-        private Empresa empresa = new Empresa();
-
-
-        public void Actualizar()
+        public string Actualizar()
         {
-
-            Console.WriteLine($"\t\tSe ha notificado a {clientee.Nombre} al contacto {clientee.Contacto}");
-        }
-
-        public override string ToString()
-        {
-            return NombreSuscriptor;
+            string mensaje = "";
+            mensaje+=$"\t\tSe ha notificado a {clientee.Nombre} al contacto {clientee.Contacto}\n";
+            return mensaje;
         }
     }
 }

@@ -37,15 +37,12 @@ namespace CapaPresentacion
 
                 CapaNegocio.Observer.Empresa empresa = new CapaNegocio.Observer.Empresa();
 
-            //CapaPersistenciaDatos.Modelos.Empresa Teca = new CapaPersistenciaDatos.Modelos.Empresa();
-
-            //empresa.empresa = Teca;
-
                 Cliente cliente1 = new Cliente();
                 Cliente cliente2 = new Cliente();
                 Cliente cliente3 = new Cliente();
                 Cliente cliente4 = new Cliente();
 
+                // Datos de los 4 subscritores predeterminados
                 cliente1.Nombre = "Cristian Bonilla";
                 cliente1.Contacto = "0912345698";
                 cliente2.Nombre = "Michael Vinces";
@@ -55,19 +52,10 @@ namespace CapaPresentacion
                 cliente4.Nombre = "Cristopher Tejena";
                 cliente4.Contacto = "0934512669";
 
-            
-
-            empresa.AgregarSuscriptor(cliente1);
-            empresa.AgregarSuscriptor(cliente2);
-            empresa.AgregarSuscriptor(cliente3);
-            empresa.AgregarSuscriptor(cliente4);
-
-
-            GestionCliente gcliente = new GestionCliente(); // Instancia de la clase GestionCliente
+                GestionCliente gcliente = new GestionCliente(); // Instancia de la clase GestionCliente
                 GestionProductos gproductos = new GestionProductos(); // Instancia de la clase GestionProducto
                 GestionProductoEscogido gproductoEscogido = new GestionProductoEscogido(); // Instancia de la clase GestionProductoEscogido
                 GestionImprimir gimprimir = new GestionImprimir(); // Instancia de la clase GestionImprimir
-                //Productos productonuevo = new Productos(productos.NuevoProducto, productos.NuevoPrecio);
 
                 Productos producto1 = new Productos("Mouse Gaming color Blanco", 346);
                 Productos producto2 = new Productos("Aoc 'Rog' 32Pulg C32 G208", 370);
@@ -82,7 +70,7 @@ namespace CapaPresentacion
                 inventario.Add(producto4);
                 inventario.Add(producto5);
 
-                List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido>();// Guarda el producto escogido con su nombre y producto
+            List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido>();// Guarda el producto escogido con su nombre y producto
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("\t\t********************************************************************************");
@@ -104,8 +92,14 @@ namespace CapaPresentacion
                 Console.WriteLine("\t\t*   Ingrese su nombre: ");
                 Console.Write("\t\t\t");
                 Console.ForegroundColor = ConsoleColor.Black;
+                
                 usuario.Nombre = Console.ReadLine(); // Ingreso de nombre del usuario
-
+                Console.ForegroundColor = ConsoleColor.White;
+                empresa.AgregarSuscriptor(cliente1);
+                empresa.AgregarSuscriptor(cliente2);
+                empresa.AgregarSuscriptor(cliente3);
+                empresa.AgregarSuscriptor(cliente4);
+                Console.ForegroundColor = ConsoleColor.Black;
                 // Codigo que recibe datos de usuario, para acceder al programa 
 
                 bool acceso = false;
@@ -607,27 +601,9 @@ namespace CapaPresentacion
                                                         Console.ReadKey();
                                                         Console.Clear();
                                                         Console.ForegroundColor = ConsoleColor.Black;
-
-                                                        string respuesta = "";
-
-                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                    Console.ForegroundColor = ConsoleColor.Black;
-                                                    Console.WriteLine("\t\t~~~~~~~~~~~              Desea suscribirse a Tecagaming?             ~~~~~~~~~~~");
-                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                    Console.ForegroundColor = ConsoleColor.Black;
-                                                    Console.Write("\t\t");
-
-                                                    while (respuesta != "Si" && respuesta != "No")
-                                                    {
-                                                        respuesta = Console.ReadLine();
-                                                    }
-
-                                                    if (respuesta == "Si")
-                                                    {
                                                         Console.Write("\t\t");
-                                                        empresa.AgregarSuscriptor(cliente);
+
+                                                        Console.WriteLine(empresa.AgregarSuscriptor(cliente));// Agrega al cliente a la lista de subscriptores
 
                                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -636,28 +612,8 @@ namespace CapaPresentacion
                                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                         Console.WriteLine("\n.\n");
-
                                                         Console.ReadKey();
                                                         Console.Clear();
-
-
-                                                    }
-                                                    else 
-                                                    {
-                                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                        Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                        Console.ForegroundColor = ConsoleColor.Black;
-                                                        Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~              Compra Finalizada             ~~~~~~~~~~~~~~~~~~");
-                                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                        Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                        Console.WriteLine("\n.\n");
-                                                        cliente = null;
-
-                                                        Console.ReadKey();
-                                                        Console.Clear();
-                                                    }
-
-                                                    
                                                         accesoVenta = false;
                                                         productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
                                                         break;
@@ -675,52 +631,17 @@ namespace CapaPresentacion
                                                         Console.ReadKey();
                                                         Console.Clear();
                                                         Console.ForegroundColor = ConsoleColor.Black;
+                                                        Console.Write("\t\t");
 
-                                                        respuesta = "";
+                                                        Console.WriteLine(empresa.AgregarSuscriptor(cliente)); // Agrega al cliente a la lista de subscriptores
 
-                                                        do
-                                                        {
-                                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                            Console.ForegroundColor = ConsoleColor.Black;
-                                                            Console.WriteLine("\t\t~~~~~~~~~~~              Desea suscribirse a Tecagaming?             ~~~~~~~~~~~");
-                                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                            Console.ForegroundColor = ConsoleColor.Black;
-                                                            Console.Write("\t\t");
-                                                            respuesta = Console.ReadLine();
-
-
-                                                            if (respuesta == "Si" || respuesta == "No")
-                                                            {
-                                                                if (respuesta == "Si")
-                                                                {
-                                                                    Console.Write("\t\t");
-                                                                    empresa.AgregarSuscriptor(cliente);
-                                                                    respuesta = "No";
-                                                                }
-                                                                else if (respuesta == "No")
-                                                                {
-                                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                                    Console.ForegroundColor = ConsoleColor.Black;
-                                                                    Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~              Compra Finalizada             ~~~~~~~~~~~~~~~~~~");
-                                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                                    Console.WriteLine("\t\t--------------------------------------------------------------------------------");
-                                                                    Console.WriteLine("\n.\n");
-
-                                                                    Console.ReadKey();
-                                                                    Console.Clear();
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                
-                                                                Console.WriteLine("\t\tERROR....Escriba Si o No");
-                                                                Console.ReadKey();
-                                                                Console.Clear();
-                                                            }
-                                                        } while (respuesta != "Si" && respuesta != "No");
+                                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                        Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                        Console.ForegroundColor = ConsoleColor.Black;
+                                                        Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~              Compra Finalizada             ~~~~~~~~~~~~~~~~~~");
+                                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                        Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                                        Console.WriteLine("\n.\n");
                                                         accesoVenta = false;
                                                         productosEscogidos.Clear(); // Limpia la lista de los productos agregados a la venta
                                                         Console.ReadKey();
@@ -847,8 +768,9 @@ namespace CapaPresentacion
                                 Console.WriteLine("\t\t  Se ha agregado correctamente " + productos.NuevoProducto + " cuyo valor es $" + productos.NuevoPrecio);
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                                Console.ForegroundColor = ConsoleColor.Black;
 
-                                empresa.NuevoProducto(productonuevo.NuevoProducto);
+                                Console.WriteLine(empresa.NuevoProducto(productonuevo.NuevoProducto));    
 
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
