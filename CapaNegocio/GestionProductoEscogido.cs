@@ -10,6 +10,11 @@ namespace CapaNegocio
     public class GestionProductoEscogido
     {
         ProductoEscogido total = new ProductoEscogido();
+         
+        //Expresion Lambda que calcula el subtotal de los productos, la cual recibes los parametros del valor unitario y la cantidad del mismo
+        //las cuales se multiplican.
+        // Los parametros recibidos son de dos tipos double e int y su salida es de tipo double.
+        Func<double, int, double> subtotal = (valorUnitario, cantidad) => valorUnitario * cantidad;
         public GestionProductoEscogido()
         {
 
@@ -63,7 +68,6 @@ namespace CapaNegocio
         {
             string mensaje = "";
             int cont = 1;
-            double precio = 0, cantidad = 0, subtotal = 0;
             total.Subtotal = 0;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
@@ -72,10 +76,7 @@ namespace CapaNegocio
             {
                 mensaje += "\n\t\t      " + cont + ". " + ListaProdEscg[i].miProducto.NombreProducto + "\t     $" + ListaProdEscg[i].miProducto.ValorUnitario + "\t\t x" + ListaProdEscg[i].Cantidad;
                 cont++;
-                cantidad = ListaProdEscg[i].Cantidad;
-                precio = ListaProdEscg[i].miProducto.ValorUnitario;
-                subtotal = precio * cantidad;
-                total.Subtotal += subtotal;
+                total.Subtotal += subtotal(ListaProdEscg[i].miProducto.ValorUnitario, ListaProdEscg[i].Cantidad);
             }
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t SUBTOTAL: \t$" + total.Subtotal;
@@ -87,15 +88,11 @@ namespace CapaNegocio
         {
 
             int cont = 1;
-            double precio = 0, cantidad = 0, subtotal = 0;
             total.Subtotal = 0;
             for (int i = 0; i < ListaProdEscg.Count; i++)
             {
                 cont++;
-                cantidad = ListaProdEscg[i].Cantidad;
-                precio = ListaProdEscg[i].miProducto.ValorUnitario;
-                subtotal = precio * cantidad;
-                total.Subtotal += subtotal;
+                total.Subtotal += subtotal(ListaProdEscg[i].miProducto.ValorUnitario, ListaProdEscg[i].Cantidad);
             }
 
             return total.Subtotal;

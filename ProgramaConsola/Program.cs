@@ -49,7 +49,7 @@ namespace CapaPresentacion
                 cliente2.Contacto = "0987463521";
                 cliente3.Nombre = "Pamela Vera";
                 cliente3.Contacto = "093648752";
-                cliente4.Nombre = "Cristopher Tejena";
+                cliente4.Nombre = "Christopher Tejena";
                 cliente4.Contacto = "0934512669";
 
                 GestionCliente gcliente = new GestionCliente(); // Instancia de la clase GestionCliente
