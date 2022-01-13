@@ -64,23 +64,13 @@ namespace CapaPresentacion
                 cliente3.Nombre = "Carol María Pamela"; cliente3.Apellido = "Vera Castro"; cliente3.Contacto = "0987945785";
                 cliente4.Nombre = "Christopher Aaron"; cliente4.Apellido = "Tejena Chávez"; cliente4.Contacto = "0956474149";
 
-
-
-                List<Suscriptor> suscriptores = new List<Suscriptor> 
+                List<Suscriptor> suscriptores = new List<Suscriptor>
                 { 
-
                     new Suscriptor {clientee = cliente1},
                     new Suscriptor {clientee = cliente2},
                     new Suscriptor {clientee = cliente3},
                     new Suscriptor {clientee = cliente4},
-                    
-                    /*new Suscriptor{Nombre = "Cristian Jair", Apellido = "Bonilla Moreira", Contacto = "0984571236"},
-                    new Suscriptor{Nombre = "Michael Leonardo", Apellido = "Vinces Andrade", Contacto = "0914647852"},
-                    new Suscriptor{Nombre = "Carol Pamela          ", Apellido = "Vera Castro", Contacto = "0987945785"},
-                    new Suscriptor{Nombre = "Christopher Aaron", Apellido = "Tejena Chávez", Contacto = "0956474149"},*/
                 };
-
-
 
                 List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido> { };// Guarda el producto escogido con su nombre y producto
 
@@ -871,7 +861,7 @@ namespace CapaPresentacion
                             Console.WriteLine("\t\t********************************************************************************");
                             Console.ForegroundColor = ConsoleColor.Black;
 
-                            // Ordena segun el abecedario los productos del inventario y selecciona su nombre y precio segun el orden que le corresponde.
+                            // Ordena segun el abecedario los apellidos de los  suscriptores y selecciona sus nombres completos con sus respectivos numeros telefonicos.
                             var consulta = suscriptores.OrderBy(p => p.clientee.Apellido).Select(x => new { nombres = x.clientee.Nombre, 
                                 apellidos = x.clientee.Apellido, telefono = x.clientee.Contacto }); //[5]
                             int cont = 0;
