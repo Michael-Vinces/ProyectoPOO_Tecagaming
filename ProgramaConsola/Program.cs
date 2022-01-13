@@ -31,7 +31,7 @@ namespace CapaPresentacion
                 Console.Clear(); // Limpiar consola
 
                 Usuario usuario = new Usuario(); // Instancia de la clase Usuario
-                Productos productos = new Productos("",0); // Instancia de la clase Productos
+                Productos productos = new Productos(); // Instancia de la clase Productos
                 Cliente cliente = new Cliente(); // Instancia de la clase Cliente
                 ProductoEscogido nProducto = new ProductoEscogido(); // Instancia de la clase ProductoEscogido
 
@@ -57,20 +57,17 @@ namespace CapaPresentacion
                 GestionProductoEscogido gproductoEscogido = new GestionProductoEscogido(); // Instancia de la clase GestionProductoEscogido
                 GestionImprimir gimprimir = new GestionImprimir(); // Instancia de la clase GestionImprimir
 
-                Productos producto1 = new Productos("Mouse Gaming color Blanco", 346);
-                Productos producto2 = new Productos("Aoc 'Rog' 32Pulg C32 G208", 370);
-                Productos producto3 = new Productos("Samsung 27Pulg Curve 1.8M", 788);
-                Productos producto4 = new Productos("Gigabyte 32 P Pantalla Pc", 572);
-                Productos producto5 = new Productos("Teclado Mecánico Redragon", 100);
+                List<Productos> inventario = new List<Productos> // Lista de los productos que estan en stock
+                {
+                    new Productos{NombreProducto="Mouse Gaming color Blanco", ValorUnitario=346},
+                    new Productos{NombreProducto="Teclado Mecánico Redragon", ValorUnitario=370},
+                    new Productos{NombreProducto="Samsung 27Pulg Curve 1.8M", ValorUnitario=788},
+                    new Productos{NombreProducto="Cpu Core-i5 4taG 36gb Ram", ValorUnitario=329},
+                    new Productos{NombreProducto="Aoc 'Rog' 32Pulg C32 G208", ValorUnitario=100},
+                    new Productos{NombreProducto="Teclado Mecanico Apex Pro", ValorUnitario=172},
+                };
 
-                List<Productos> inventario = new List<Productos>();// Guarda el nombre y precio al inventario
-                inventario.Add(producto1);
-                inventario.Add(producto2);
-                inventario.Add(producto3);
-                inventario.Add(producto4);
-                inventario.Add(producto5);
-
-            List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido>();// Guarda el producto escogido con su nombre y producto
+                List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido> { };// Guarda el producto escogido con su nombre y producto
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("\t\t********************************************************************************");
@@ -246,7 +243,7 @@ namespace CapaPresentacion
                                 Console.WriteLine("\t\t********************************************************************************");
                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                Console.WriteLine(gproductos.MostrarInventario(inventario));// Muestra la lista de productos del inventario
+                                Console.WriteLine(gproductos.MostrarInventarioOrdenado(inventario));// Muestra la lista de productos del inventario
                                 
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.WriteLine("\t\t********************************************************************************");
@@ -463,7 +460,7 @@ namespace CapaPresentacion
                                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                 Console.ForegroundColor = ConsoleColor.Black;
                                                 
-                                                Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidos
+                                                Console.WriteLine(gproductoEscogido.MostrarVenta(productosEscogidos));// Muestra la Lista de los productos escogidos
 
                                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                                 Console.WriteLine("\t\t********************************************************************************");
@@ -513,8 +510,9 @@ namespace CapaPresentacion
                                                     Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                     Console.ForegroundColor = ConsoleColor.Black;
 
-                                                    Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidosConsole.ForegroundColor = ConsoleColor.DarkBlue;
+                                                    Console.WriteLine(gproductoEscogido.MostrarVentaOrdenada(productosEscogidos));// Muestra la Lista Ordenada de los productos escogidos
                                                     
+                                                    Console.ForegroundColor = ConsoleColor.DarkBlue;
                                                     Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                                     Console.ForegroundColor = ConsoleColor.Black;
                                                     Console.WriteLine("\t\t~~~~~~~~~~~~~~~          Presione enter para continuar           ~~~~~~~~~~~~~~~");
@@ -565,7 +563,7 @@ namespace CapaPresentacion
                                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------\n");
                                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                                Console.WriteLine(gproductoEscogido.MostrarListaVenta(productosEscogidos));// Muestra la Lista de los productos escogidos
+                                                Console.WriteLine(gproductoEscogido.MostrarVentaOrdenada(productosEscogidos));// Muestra la Lista Ordenada de los productos escogidos
                                             
                                                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                                                 Console.WriteLine("\t\t********************************************************************************");
@@ -755,12 +753,9 @@ namespace CapaPresentacion
                                     productos.NuevoPrecio = Double.Parse(Console.ReadLine());
                                 }
 
-                                Productos productonuevo = new Productos(productos.NuevoProducto, productos.NuevoPrecio);
-
-                                inventario.Add(productonuevo);
+                                var productonuevo=new Productos { NombreProducto = productos.NuevoProducto, ValorUnitario = productos.NuevoPrecio };
+                                inventario.Add(productonuevo);// Agrega el nuevo producto
                                 
-                                
-
                                 Console.Clear();
                                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");

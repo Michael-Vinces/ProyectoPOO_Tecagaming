@@ -14,6 +14,7 @@ namespace CapaNegocio
         Empresa empresa = new Empresa();
         GestionProductoEscogido gpescogido = new GestionProductoEscogido();
         GestionTotalPago gtpago = new GestionTotalPago();
+
         public GestionImprimir()
         {
 
@@ -21,6 +22,8 @@ namespace CapaNegocio
         public string MostrarFactura(List<ProductoEscogido> lista, Cliente cliente)
         {
             string factura = "";
+            var consulta = lista.OrderBy(p => p.miProducto.NombreProducto).Select(x => new { Producto = x.miProducto.NombreProducto, Precio = x.miProducto.ValorUnitario, cantidad = x.Cantidad });
+
             factura += "\t\t\t-----------------------------------------------------------------\n";
             factura += "\t\t\t|                      " + this.empresa.Nombre + " FACTURA                       |";
             factura += this.gempresa.MostrarEmpresa();
@@ -29,10 +32,10 @@ namespace CapaNegocio
             factura += "\n\t\t\t-----------------------------------------------------------------";
             factura += "\n\t\t\t|  N°       Producto             Valor Unitario        Cantidad |";
             factura += "\n\t\t\t-----------------------------------------------------------------";
-            foreach (var item in lista)
+            foreach (var item in consulta)
             {
                 factura += "\n\t\t\t";
-                factura += "|  " + cont + ". " + item.miProducto.NombreProducto + "\t     $" + item.miProducto.ValorUnitario + "\t\t x" + item.Cantidad;
+                factura += "|  " + cont + ". " + item.Producto + "\t     $" + item.Precio + "\t\t x" + item.cantidad;
                 cont++;
             }
             factura += this.gtpago.MostrarTotalPago(gpescogido.MostrarSubtotal(lista));
@@ -41,6 +44,8 @@ namespace CapaNegocio
         public string MostrarProforma(List<ProductoEscogido> lista, Cliente cliente)
         {
             string proforma = "";
+            var consulta = lista.OrderBy(p => p.miProducto.NombreProducto).Select(x => new { Producto = x.miProducto.NombreProducto, Precio = x.miProducto.ValorUnitario, cantidad = x.Cantidad });
+
             proforma += "\t\t\t-----------------------------------------------------------------\n";
             proforma += "\t\t\t|                      " + this.empresa.Nombre + " PROFORMA                       |";
             proforma += this.gempresa.MostrarEmpresa(); ;
@@ -49,10 +54,10 @@ namespace CapaNegocio
             proforma += "\n\t\t\t-----------------------------------------------------------------";
             proforma += "\n\t\t\t|  N°       Producto             Valor Unitario        Cantidad  |";
             proforma += "\n\t\t\t-----------------------------------------------------------------";
-            foreach (var item in lista)
+            foreach (var item in consulta)
             {
                 proforma += "\n\t\t\t";
-                proforma += "|  " + cont + ". " + item.miProducto.NombreProducto + "\t     $" + item.miProducto.ValorUnitario + "\t\t x" + item.Cantidad;
+                proforma += "|  " + cont + ". " + item.Producto + "\t     $" + item.Precio + "\t\t x" + item.cantidad;
                 cont++;
             }
             proforma += this.gtpago.MostrarTotalPago(gpescogido.MostrarSubtotal(lista));

@@ -14,22 +14,37 @@ namespace CapaNegocio
         {
         }
 
+        public string MostrarInventarioOrdenado(List<Productos> Lista)
+        {
+            string mensaje = "";
+            int cont = 0;
+            // Ordena segun el abecedario los productos del inventario y selecciona su nombre y precio segun el orden que le corresponde.
+            var consulta = Lista.OrderBy(p => p.NombreProducto).Select(x => new {Producto = x.NombreProducto, Precio = x.ValorUnitario });
+            mensaje += "\t\tN°         Producto                 Valor Unitario\n";
+
+            foreach (var item in consulta)
+            {
+                cont++;
+                mensaje += "\t\t" + cont + ". " + item.Producto + "\t\t$" + item.Precio +"\n";
+            }
+            return mensaje;
+        }
         public string MostrarInventario(List<Productos> Lista)
         {
             string mensaje = "";
-            int cont = 1;
+            int cont = 0;
             mensaje += "\t\tN°         Producto                 Valor Unitario\n";
             for (int i = 0; i < Lista.Count; i++)
             {
-                mensaje += "\t\t" + cont + ". " + Lista[i].NombreProducto + "\t\t$" + Lista[i].ValorUnitario + "\n";
                 cont++;
+                mensaje += "\t\t" + cont + ". " + Lista[i].NombreProducto + "\t\t$" + Lista[i].ValorUnitario + "\n";
             }
             return mensaje;
         }
         public void EliminarProductoinventario(int num, List<Productos> Listainventario)
         {
-            Productos producto = new Productos("",0);
-
+            Productos producto = new Productos();
+            
             for (int i = 1; i <= Listainventario.Count; i++)
             {
                 if (i == num - 1)

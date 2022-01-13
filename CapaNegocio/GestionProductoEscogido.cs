@@ -37,11 +37,11 @@ namespace CapaNegocio
         public ProductoEscogido EscogerProducto(int num, List<Productos> inventario, List<ProductoEscogido> ListaProductosEscogidos)
         {
             
-            Productos producto = new Productos("Mouse Gaming color Blanco", 346);
+            Productos producto = new Productos();
 
-            for (int i = 1; i <= inventario.Count; i++)
+            for (int i = 0; i <= inventario.Count; i++)
             {
-                if (i == num - 1)
+                if (i == num-1)
                 {
 
                     producto = inventario[i];
@@ -64,25 +64,41 @@ namespace CapaNegocio
             productoEscogido.Cantidad = cantidad;
 
         }
-        public string MostrarListaVenta(List<ProductoEscogido> ListaProdEscg)
+        public string MostrarVenta(List<ProductoEscogido> ListaProdEscg)
         {
             string mensaje = "";
-            int cont = 1;
-            total.Subtotal = 0;
+            int cont = 0;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             for (int i = 0; i < ListaProdEscg.Count; i++)
             {
-                mensaje += "\n\t\t      " + cont + ". " + ListaProdEscg[i].miProducto.NombreProducto + "\t     $" + ListaProdEscg[i].miProducto.ValorUnitario + "\t\t x" + ListaProdEscg[i].Cantidad;
                 cont++;
-                total.Subtotal += subtotal(ListaProdEscg[i].miProducto.ValorUnitario, ListaProdEscg[i].Cantidad);
+                mensaje += "\n\t\t      " + cont + ". " + ListaProdEscg[i].miProducto.NombreProducto + "\t     $" + ListaProdEscg[i].miProducto.ValorUnitario + "\t\t x" + ListaProdEscg[i].Cantidad;
+            }
+            return mensaje;
+
+        }
+        public string MostrarVentaOrdenada(List<ProductoEscogido> ListaProdEscg)
+        {
+            string mensaje = "";
+            int cont = 0;
+            // Ordena segun el abecedario los productos de la venta y selecciona su nombre, precio y cantidad segun el orden que le corresponde.
+            var consulta = ListaProdEscg.OrderBy(p => p.miProducto.NombreProducto).Select(x => new { Producto = x.miProducto.NombreProducto, Precio = x.miProducto.ValorUnitario, cantidad=x.Cantidad});
+            total.Subtotal = 0;
+            mensaje += "\n\t\t--------------------------------------------------------------------------------";
+            mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
+            mensaje += "\n\t\t--------------------------------------------------------------------------------";
+            foreach (var item in consulta)
+            {
+                cont++;
+                mensaje += "\n\t\t      " + cont + ". " + item.Producto + "\t     $" + item.Precio + "\t\t x" + item.cantidad;
+                total.Subtotal += subtotal(item.Precio, item.cantidad);
             }
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t SUBTOTAL: \t$" + total.Subtotal;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             return mensaje;
-
         }
         public double MostrarSubtotal(List<ProductoEscogido> ListaProdEscg)
         {
