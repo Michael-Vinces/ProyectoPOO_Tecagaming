@@ -37,21 +37,6 @@ namespace CapaPresentacion
 
                 CapaNegocio.Observer.Empresa empresa = new CapaNegocio.Observer.Empresa();
 
-                Cliente cliente1 = new Cliente();
-                Cliente cliente2 = new Cliente();
-                Cliente cliente3 = new Cliente();
-                Cliente cliente4 = new Cliente();
-
-                // Datos de los 4 subscritores predeterminados
-                cliente1.Nombre = "Cristian Bonilla";
-                cliente1.Contacto = "0912345698";
-                cliente2.Nombre = "Michael Vinces";
-                cliente2.Contacto = "0987463521";
-                cliente3.Nombre = "Pamela Vera";
-                cliente3.Contacto = "093648752";
-                cliente4.Nombre = "Christopher Tejena";
-                cliente4.Contacto = "0934512669";
-
                 GestionCliente gcliente = new GestionCliente(); // Instancia de la clase GestionCliente
                 GestionProductos gproductos = new GestionProductos(); // Instancia de la clase GestionProducto
                 GestionProductoEscogido gproductoEscogido = new GestionProductoEscogido(); // Instancia de la clase GestionProductoEscogido
@@ -59,13 +44,43 @@ namespace CapaPresentacion
 
                 List<Productos> inventario = new List<Productos> // Lista de los productos que estan en stock
                 {
-                    new Productos{NombreProducto="Mouse Gaming color Blanco", ValorUnitario=346},
-                    new Productos{NombreProducto="Teclado Mecánico Redragon", ValorUnitario=370},
+                    new Productos{NombreProducto="Mouse Gaming color Blanco", ValorUnitario=115},
+                    new Productos{NombreProducto="Teclado Mecánico Redragon", ValorUnitario=100},
                     new Productos{NombreProducto="Samsung 27Pulg Curve 1.8M", ValorUnitario=788},
                     new Productos{NombreProducto="Cpu Core-i5 4taG 36gb Ram", ValorUnitario=329},
-                    new Productos{NombreProducto="Aoc 'Rog' 32Pulg C32 G208", ValorUnitario=100},
+                    new Productos{NombreProducto="Aoc 'Rog' 32Pulg C32 G208", ValorUnitario=370},
                     new Productos{NombreProducto="Teclado Mecanico Apex Pro", ValorUnitario=172},
                 };
+
+
+                Cliente cliente1 = new Cliente();
+                Cliente cliente2 = new Cliente();
+                Cliente cliente3 = new Cliente();
+                Cliente cliente4 = new Cliente();
+
+                // Datos de los 4 subscritores predeterminados
+                cliente1.Nombre = "Cristian Jair"; cliente1.Apellido = "Bonilla Moreira"; cliente1.Contacto = "0912345698";
+                cliente2.Nombre = "Michael Leonardo"; cliente2.Apellido = "Vinces Andrade"; cliente2.Contacto = "0914647852";
+                cliente3.Nombre = "Carol María Pamela"; cliente3.Apellido = "Vera Castro"; cliente3.Contacto = "0987945785";
+                cliente4.Nombre = "Christopher Aaron"; cliente4.Apellido = "Tejena Chávez"; cliente4.Contacto = "0956474149";
+
+
+
+                List<Suscriptor> suscriptores = new List<Suscriptor> 
+                { 
+
+                    new Suscriptor {clientee = cliente1},
+                    new Suscriptor {clientee = cliente2},
+                    new Suscriptor {clientee = cliente3},
+                    new Suscriptor {clientee = cliente4},
+                    
+                    /*new Suscriptor{Nombre = "Cristian Jair", Apellido = "Bonilla Moreira", Contacto = "0984571236"},
+                    new Suscriptor{Nombre = "Michael Leonardo", Apellido = "Vinces Andrade", Contacto = "0914647852"},
+                    new Suscriptor{Nombre = "Carol Pamela          ", Apellido = "Vera Castro", Contacto = "0987945785"},
+                    new Suscriptor{Nombre = "Christopher Aaron", Apellido = "Tejena Chávez", Contacto = "0956474149"},*/
+                };
+
+
 
                 List<ProductoEscogido> productosEscogidos = new List<ProductoEscogido> { };// Guarda el producto escogido con su nombre y producto
 
@@ -92,10 +107,10 @@ namespace CapaPresentacion
                 
                 usuario.Nombre = Console.ReadLine(); // Ingreso de nombre del usuario
                 Console.ForegroundColor = ConsoleColor.White;
-                empresa.AgregarSuscriptor(cliente1);
+                /*empresa.AgregarSuscriptor(cliente1);                         ASDFIAUDHSFIAGSDFOIGOFGSAFGIUSAIGFASFDASI
                 empresa.AgregarSuscriptor(cliente2);
                 empresa.AgregarSuscriptor(cliente3);
-                empresa.AgregarSuscriptor(cliente4);
+                empresa.AgregarSuscriptor(cliente4);*/
                 Console.ForegroundColor = ConsoleColor.Black;
                 // Codigo que recibe datos de usuario, para acceder al programa 
 
@@ -219,8 +234,9 @@ namespace CapaPresentacion
                         Console.WriteLine("\t\t*    2. Realizar venta                                                         *");
                         Console.WriteLine("\t\t*    3. Agregar un producto                                                    *");
                         Console.WriteLine("\t\t*    4. Eliminar un producto                                                   *");
-                        Console.WriteLine("\t\t*    5. Cerrar sesión                                                          *");
-                        Console.WriteLine("\t\t*    6. Salir                                                                  *");
+                        Console.WriteLine("\t\t*    5. Suscriptores                                                           *");
+                        Console.WriteLine("\t\t*    6. Cerrar sesión                                                          *"); 
+                        Console.WriteLine("\t\t*    7. Salir                                                                  *"); 
                         Console.WriteLine("\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         Console.WriteLine("\t\t*                                                                              *");
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -266,10 +282,15 @@ namespace CapaPresentacion
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine("\t\t********************************************************************************");
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\t\t*    Ingrese el nombre del cliente");
+                                Console.WriteLine("\t\t*    Ingrese los nombres del cliente");
                                 Console.Write("\t\t     ");
                                 Console.ForegroundColor = ConsoleColor.Black;
-                                cliente.Nombre = Console.ReadLine();    // << Permite ingresar el nombre del cliente >>
+                                cliente.Nombre = Console.ReadLine();    // << Permite ingresar los nombres del cliente >>
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("\t\t*    Ingrese los apellidos del cliente");
+                                Console.Write("\t\t     ");
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                cliente.Apellido = Console.ReadLine();    // << Permite ingresar los apellidos del cliente >>
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                 Console.WriteLine("\t\t*    Ingrese su cedula");
                                 Console.Write("\t\t     ");
@@ -601,7 +622,7 @@ namespace CapaPresentacion
                                                         Console.ForegroundColor = ConsoleColor.Black;
                                                         Console.Write("\t\t");
 
-                                                        Console.WriteLine(empresa.AgregarSuscriptor(cliente));// Agrega al cliente a la lista de subscriptores
+                                                        //Console.WriteLine(empresa.AgregarSuscriptor(cliente));// Agrega al cliente a la lista de subscriptores
 
                                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -631,7 +652,7 @@ namespace CapaPresentacion
                                                         Console.ForegroundColor = ConsoleColor.Black;
                                                         Console.Write("\t\t");
 
-                                                        Console.WriteLine(empresa.AgregarSuscriptor(cliente)); // Agrega al cliente a la lista de subscriptores
+                                                        //Console.WriteLine(empresa.AgregarSuscriptor(cliente)); // Agrega al cliente a la lista de subscriptores
 
                                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                                                         Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -765,7 +786,7 @@ namespace CapaPresentacion
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
                                 Console.ForegroundColor = ConsoleColor.Black;
 
-                                Console.WriteLine(empresa.NuevoProducto(productonuevo.NuevoProducto));    
+                                Console.WriteLine(empresa.NuevoProducto(productonuevo.NuevoProducto, suscriptores));    
 
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.WriteLine("\t\t--------------------------------------------------------------------------------");
@@ -839,7 +860,44 @@ namespace CapaPresentacion
 
                                 break;
 
+
                             case 5:
+
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.WriteLine("\t\t********************************************************************************");
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.WriteLine("\t\t***********************            Suscriptores          ***********************");
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.WriteLine("\t\t********************************************************************************");
+                            Console.ForegroundColor = ConsoleColor.Black;
+
+                            // Ordena segun el abecedario los productos del inventario y selecciona su nombre y precio segun el orden que le corresponde.
+                            var consulta = suscriptores.OrderBy(p => p.clientee.Apellido).Select(x => new { nombres = x.clientee.Nombre, 
+                                apellidos = x.clientee.Apellido, telefono = x.clientee.Contacto }); //[5]
+                            int cont = 0;
+                            Console.WriteLine("\n\t\t\t\t\tSuscriptor\t\t\t Contacto");
+                            foreach (var item in consulta)
+                            {
+                                cont++;
+                                Console.WriteLine("\t\t\t  "+cont+". "+item.apellidos+" "+item.nombres+"\t\t"+item.telefono);
+                            }
+
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.WriteLine("\t\t~~~~~~~~~~~~~~~          Presione enter para continuar           ~~~~~~~~~~~~~~~");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("\t\t--------------------------------------------------------------------------------");
+
+
+                            Console.ReadKey();
+                            Console.Clear();
+
+                            break;
+
+
+
+                            case 6:
 
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                 Console.WriteLine("\t\t********************************************************************************");
@@ -860,7 +918,7 @@ namespace CapaPresentacion
 
                                 break;
 
-                            case 6:
+                            case 7:
 
                                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                                 Console.WriteLine("\t\t********************************************************************************");

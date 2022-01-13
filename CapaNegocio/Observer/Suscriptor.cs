@@ -22,7 +22,7 @@ namespace CapaNegocio.Observer
         public string Actualizar()
         {
             string mensaje = "";
-            mensaje+=$"\t\tSe ha notificado a {clientee.Nombre} al contacto {clientee.Contacto}\n";
+            mensaje+=$"\t\tSe ha notificado a {clientee.Nombre} {clientee.Apellido} con el contacto {clientee.Contacto}\n";
             return mensaje;
         }
     }

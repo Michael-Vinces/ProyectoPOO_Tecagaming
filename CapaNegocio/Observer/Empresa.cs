@@ -20,36 +20,36 @@ namespace CapaNegocio.Observer
 
         // Paso 11. Lista de  Suscriptores de tipo IObserverSuscriptor
 
-        public List<IObserverSuscriptor> suscriptores = new List<IObserverSuscriptor>();
+        //public List<IObserverSuscriptor> suscriptores = new List<IObserverSuscriptor>();
 
         // Paso 12. Instancia de la clase empresa 
 
-        CapaPersistenciaDatos.Modelos.Empresa Teca = new CapaPersistenciaDatos.Modelos.Empresa();
+        //CapaPersistenciaDatos.Modelos.Empresa Teca = new CapaPersistenciaDatos.Modelos.Empresa();
 
         // Paso 13. Asignamos la empresa instanciada a la propiedad empresa en el constructor de la clase 
         public Empresa()
         {
-            this.empresa = Teca;
+            
         }
 
         // Paso 14. Le damos funcionalidad al metodo AgregarSuscriptor
         // Le pasamos un cliente, se crea una instacia de suscriptor y le asignamos el cliente 
         // Se agraga supcritor a la lista de suscriptores 
         // Retorna un mensaje que confirme que el usuario se suscribio a la empresa 
-        public string AgregarSuscriptor(Cliente cliente)
+        /*public string AgregarSuscriptor(Cliente cliente)
         {
             Suscriptor subs = new Suscriptor();
             string mensaje = "";
             subs.clientee = cliente;
             suscriptores.Add(subs);
-            mensaje+=$"{subs.clientee.Nombre.ToString()} con el celular de {subs.clientee.Contacto.ToString()} se ha suscrito a {empresa.Nombre}\n";
+            mensaje+=$"{subs.clientee.Nombre.ToString()} {subs.clientee.Apellido} con el celular de {subs.clientee.Contacto.ToString()} se ha suscrito a {empresa.Nombre}\n";
             return mensaje;
-        }
+        }*/
 
         // Paso 15. Le damos funcionalidad al metodo Notificar 
         // Recorre la lista de suscriptores y en cada integracion llama al metodo actualizar
         // Retorna un mensaje que muestran que se han notificado a todos los clientes de la lista Suscriptores
-        public string Notificar()
+        public string Notificar(List<Suscriptor> suscriptores)
         {
             string mensaje = "";
             foreach (var suscriptor in suscriptores)
@@ -63,11 +63,11 @@ namespace CapaNegocio.Observer
         // Pide por parametro un string con el nombre del producto 
         // Se llama al metodo Notificar 
         // Retorna todas las notificaciones disponibles en un mensaje 
-        public string NuevoProducto(string nombreProducto)
+        public string NuevoProducto(string nombreProducto, List<Suscriptor> suscriptores)
         {
             string mensaje = "";
             this.nuevoProducto = nombreProducto;
-            mensaje=this.Notificar();
+            mensaje=this.Notificar(suscriptores);
             return mensaje;
         }
     }

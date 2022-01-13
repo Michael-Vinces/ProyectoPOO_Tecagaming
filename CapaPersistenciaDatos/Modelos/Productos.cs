@@ -24,10 +24,9 @@ namespace CapaPersistenciaDatos.Modelos
       
 
         // CONSTRUCTOR DE LA CLASE PRODUCTOS
-        public Productos(/*string nombre, double precio*/)
+        public Productos()
         {
-            /*this.NombreProducto = nombre;
-            this.ValorUnitario = precio;*/
+            
         }
 
     }

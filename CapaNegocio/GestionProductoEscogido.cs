@@ -11,10 +11,11 @@ namespace CapaNegocio
     {
         ProductoEscogido total = new ProductoEscogido();
          
-        //Expresion Lambda que calcula el subtotal de los productos, la cual recibes los parametros del valor unitario y la cantidad del mismo
-        //las cuales se multiplican.
+        //Expresion Lambda que calcula el subtotal de los productos, la cual recibes los parametros del valor
+        //unitario y la cantidad del mismo las cuales se multiplican.
         // Los parametros recibidos son de dos tipos double e int y su salida es de tipo double.
-        Func<double, int, double> subtotal = (valorUnitario, cantidad) => valorUnitario * cantidad;
+
+        Func<double, int, double> subtotal = (valorUnitario, cantidad) => valorUnitario * cantidad; //[1]
         public GestionProductoEscogido()
         {
 
@@ -79,21 +80,22 @@ namespace CapaNegocio
             return mensaje;
 
         }
-        public string MostrarVentaOrdenada(List<ProductoEscogido> ListaProdEscg)
+        public string MostrarVentaOrdenada(List<ProductoEscogido> ListaProdEscg) 
         {
             string mensaje = "";
             int cont = 0;
             // Ordena segun el abecedario los productos de la venta y selecciona su nombre, precio y cantidad segun el orden que le corresponde.
-            var consulta = ListaProdEscg.OrderBy(p => p.miProducto.NombreProducto).Select(x => new { Producto = x.miProducto.NombreProducto, Precio = x.miProducto.ValorUnitario, cantidad=x.Cantidad});
+            var consulta = ListaProdEscg.OrderBy(p => p.miProducto.NombreProducto).Select(x => new { Producto = x.miProducto.NombreProducto, 
+                Precio = x.miProducto.ValorUnitario, cantidad=x.Cantidad}); //[4]
             total.Subtotal = 0;
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t      N°        Producto                Valor Unitario        Cantidad";
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
-            foreach (var item in consulta)
+            foreach (var item in consulta) // <----
             {
                 cont++;
-                mensaje += "\n\t\t      " + cont + ". " + item.Producto + "\t     $" + item.Precio + "\t\t x" + item.cantidad;
-                total.Subtotal += subtotal(item.Precio, item.cantidad);
+                mensaje += "\n\t\t      " + cont + ". " + item.Producto + "\t     $" + item.Precio + "\t\t x" + item.cantidad; //[4] <----
+                total.Subtotal += subtotal(item.Precio, item.cantidad); //[1] <----
             }
             mensaje += "\n\t\t--------------------------------------------------------------------------------";
             mensaje += "\n\t\t SUBTOTAL: \t$" + total.Subtotal;

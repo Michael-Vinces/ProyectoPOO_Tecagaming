@@ -11,8 +11,8 @@ namespace CapaNegocio.Observer
     public interface ISujetoEmpresa
     {
         // Paso2.  Se crea el metodo agregar suscriptores 
-        string AgregarSuscriptor(Cliente cliente);
+        //string AgregarSuscriptor(Cliente cliente);
         // Paso 3. Se crea el Metodo Notificar
-        string Notificar();
+        string Notificar(List<Suscriptor> suscriptores);
     }
 }

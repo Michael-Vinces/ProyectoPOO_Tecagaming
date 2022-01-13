@@ -9,7 +9,7 @@ namespace CapaNegocio
 {
     public class GestionProductos
     {
-       
+
         public GestionProductos()
         {
         }
@@ -19,13 +19,13 @@ namespace CapaNegocio
             string mensaje = "";
             int cont = 0;
             // Ordena segun el abecedario los productos del inventario y selecciona su nombre y precio segun el orden que le corresponde.
-            var consulta = Lista.OrderBy(p => p.NombreProducto).Select(x => new {Producto = x.NombreProducto, Precio = x.ValorUnitario });
+            var consulta = Lista.OrderBy(p => p.NombreProducto).Select(x => new { Producto = x.NombreProducto, Precio = x.ValorUnitario }); //[5] 
             mensaje += "\t\tN°         Producto                 Valor Unitario\n";
 
-            foreach (var item in consulta)
+            foreach (var item in consulta) // <----
             {
                 cont++;
-                mensaje += "\t\t" + cont + ". " + item.Producto + "\t\t$" + item.Precio +"\n";
+                mensaje += "\t\t" + cont + ". " + item.Producto + "\t\t$" + item.Precio +"\n"; //[5] <----
             }
             return mensaje;
         }

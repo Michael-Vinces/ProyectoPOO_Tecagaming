@@ -13,19 +13,19 @@ namespace CapaNegocio
 
         //Expresion Lambda que calcula el iva, la cual recibe el parametro del subtotal y lo multiplica por su respectivo iva.
         // El parametro es de tipo double al igual que su salida
-        Func<double, double> iva = (pagoparcial) => pagoparcial * 0.12;
+        Func<double, double> iva = (pagoparcial) => pagoparcial * 0.12; //[2]
 
         // Expresion lambda que calcula el total de la venta, que recibe los parametros del subtotal y su multiplicacion por el iva.
         // Ambos parametros son de tipo double al igual que su salida
-        Func<double, double, double> total = (pagoparcial, pagoiva) => pagoparcial + pagoiva;
+        Func<double, double, double> total = (pagoparcial, pagoiva) => pagoparcial + pagoiva; //[3]
         public GestionTotalPago()
         {
 
         }
         public string MostrarTotalPago(double subtotal)
         {
-            this.totalpago.IVA = iva(subtotal);
-            this.totalpago.Total = total(subtotal, this.totalpago.IVA);
+            this.totalpago.IVA = iva(subtotal); //[2] <----
+            this.totalpago.Total = total(subtotal, this.totalpago.IVA); //[3] <----
             string mensaje = "";
             mensaje += "\n\t\t\t-----------------------------------------------------------------";
             mensaje += "\n\t\t\t-----------------------------------------------------------------";

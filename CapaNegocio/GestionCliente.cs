@@ -13,7 +13,7 @@ namespace CapaNegocio
         {
             string datoscliente = "";
             datoscliente += "\n\t\t\t-----------------------------------------------------------------";
-            datoscliente += "\n\t\t\t| Nombre  \t\t|" + cliente.Nombre + "";
+            datoscliente += "\n\t\t\t| Nombre  \t\t|" + cliente.Nombre + " " + cliente.Apellido;
             datoscliente += "\n\t\t\t-----------------------------------------------------------------";
             datoscliente += "\n\t\t\t| Cedula de Identidad   |" + cliente.Cedula + "\t\t\t\t|";
             datoscliente += "\n\t\t\t-----------------------------------------------------------------";
